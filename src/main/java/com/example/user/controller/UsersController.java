@@ -3,11 +3,12 @@
 package com.example.user.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,23 +74,42 @@ public class UsersController {
 				
 	}
 	
-	@PostMapping("/update/{id}")
-	public ResponseEntity<?> updateStudent(@RequestBody Users users, @PathVariable int id ){
-		Users user = usersRepo.findById(id).get();
+	@PutMapping("/updateuser/{userid}")
+	public ResponseEntity<?> updateUser(@PathVariable int userid, @RequestBody Users users) {
 		
-		usersRepo.save(users);
- 		return ResponseEntity.status(HttpStatus.OK)
-		.body(user);
-}
-	
-	@GetMapping("/delete/{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable int id){
-		
-		Users use = usersRepo.findById(id).get();
-		
-		usersRepo.delete(use);
-		
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(use);
+		 Optional<Users> optionalUser = usersRepo.findById(userid);
+		 
+	    if (!optionalUser.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+	    }
+
+	    Users existingUser = optionalUser.get();
+	    existingUser.setName(users.getName());
+	    existingUser.setEmail(users.getEmail());
+	    existingUser.setDesignation(users.getDesignation());
+	    existingUser.setPhoneno(users.getPhoneno());
+	    existingUser.setPassword(users.getPassword());
+	    
+	    usersRepo.save(existingUser);
+	    return ResponseEntity.status(HttpStatus.OK).body(existingUser);
 	}
+
+	
+	
+	@DeleteMapping("/deleteuser/{userid}")
+	public ResponseEntity<?> deleteUser(@PathVariable("userid") int userId) {
+	    Optional<Users> user = usersRepo.findById(userId);
+	    if (!user.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+	    }
+
+	    // Delete the user, which will also delete the associated addresses and banks
+	    usersRepo.delete(user.get());
+
+	    return ResponseEntity.status(HttpStatus.OK).body("User and associated records deleted successfully");
+	}
+	
+	
 }
+
+

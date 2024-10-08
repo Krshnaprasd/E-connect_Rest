@@ -39,14 +39,20 @@ public class SalaryController {
 				.body(salary);
 	}
 	
-	@GetMapping("/get")
-	public ResponseEntity<?> getUser() {
-		
-		
-		List<Salary> sal = salaryRepo.findAll();
-		
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(sal);
+	
+	@GetMapping("/get/{userid}")
+	public ResponseEntity<?> getUserSalary(@PathVariable int userid) {
+	    Users user = userRepo.findById(userid).orElse(null);
+	    
+	    if (user == null) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body("User not found");
+	    }
+
+	    List<Salary> salaryList = user.getSalary(); 
+	    
+	    return ResponseEntity.status(HttpStatus.OK)
+	            .body(salaryList);
 	}
 
 }

@@ -17,7 +17,7 @@ public class Salary {
 	@Id
 	@GeneratedValue
 	private int salaryid;
-	private String ctc;
+	
 	private String basic_salary;
 	private String ta;
 	private String fa;
@@ -26,7 +26,16 @@ public class Salary {
 	private String overall_salary;
 		
 	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Attendance> attendance;
+	private List<Users> user;
+
+	
+	
+	public List<Users> getUser() {
+		return user;
+	}
+	public void setUser(List<Users> user) {
+		this.user = user;
+	}
 
 	public int getSalaryid() {
 		return salaryid;
@@ -36,13 +45,7 @@ public class Salary {
 		this.salaryid = salaryid;
 	}
 
-	public String getCtc() {
-		return ctc;
-	}
-
-	public void setCtc(String ctc) {
-		this.ctc = ctc;
-	}
+	
 
 	public String getBasic_salary() {
 		return basic_salary;
@@ -92,13 +95,7 @@ public class Salary {
 		this.overall_salary = overall_salary;
 	}
 
-	public List<Attendance> getAttendance() {
-		return attendance;
-	}
-
-	public void setAttendance(List<Attendance> attendance) {
-		this.attendance = attendance;
-	}
+	
 
 	
 }

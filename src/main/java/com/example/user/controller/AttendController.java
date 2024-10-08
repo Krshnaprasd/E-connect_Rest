@@ -40,13 +40,17 @@ public class AttendController {
 				.body(attendance);
 	}
 	
-	@GetMapping("/get")
-	public ResponseEntity<?> getUser() {
-		
-		
-		List<Attendance> attend = attendRepo.findAll();
-		
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(attend);
+	@GetMapping("/get/{userId}")
+	public ResponseEntity<?> getUserAttendance(@PathVariable int userId) {
+	    // Fetch the user by id
+	    Users user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+	    // Fetch the attendance records for the specific user
+	    List<Attendance> attendances = user.getAttendance();
+
+	    // Return response
+	    return ResponseEntity.status(HttpStatus.OK)
+	            .body(attendances);
 	}
+
 }

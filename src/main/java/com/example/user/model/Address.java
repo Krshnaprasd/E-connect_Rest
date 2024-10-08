@@ -21,6 +21,7 @@ public class Address {
 	@Id
 	@GeneratedValue
 	private int addressid;
+	private String address;
 	private String city;
 	private String state;
 	private String location;
@@ -35,6 +36,16 @@ public class Address {
 
 	public void setAddressid(int addressid) {
 		this.addressid = addressid;
+	}
+	
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getCity() {

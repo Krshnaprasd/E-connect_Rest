@@ -23,20 +23,22 @@ public class Attendance {
 	private String present;
 	private String cl_sl;
 	private String lop;
-	private String month_salary;
+	
+	
+	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Salary> salary;
-	
+	private List<Users> user;
 
 	
 	
-	public List<Salary> getSalary() {
-		return salary;
+	public List<Users> getUser() {
+		return user;
 	}
-	public void setSalary(List<Salary> salary) {
-		this.salary = salary;
+	public void setUser(List<Users> user) {
+		this.user = user;
 	}
+	
 	public int getAttendid() {
 		return attendid;
 	}
@@ -73,11 +75,6 @@ public class Attendance {
 	public void setLop(String lop) {
 		this.lop = lop;
 	}
-	public String getMonth_salary() {
-		return month_salary;
-	}
-	public void setMonth_salary(String month_salary) {
-		this.month_salary = month_salary;
-	}
+	
 	
 }

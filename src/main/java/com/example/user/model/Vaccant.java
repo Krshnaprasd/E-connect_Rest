@@ -19,6 +19,7 @@ public class Vaccant {
 	private String frontend_developer;
 	private String backend_developer;
 	private String training_tutors;
+	
 	public int getJobid() {
 		return Jobid;
 	}
