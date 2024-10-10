@@ -1,8 +1,15 @@
 package com.example.user.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -11,63 +18,80 @@ public class Vaccant {
 
 	@Id
 	@GeneratedValue
-	private int Jobid;
-	private String manager;
-	private String team_lead;
-	private String senior_developer;
-	private String junior_developer;
-	private String frontend_developer;
-	private String backend_developer;
-	private String training_tutors;
+	private int jobid;
+	private String jobtitle;
+	private String jobdescription;
+	private String experience;
+	private String openings;
+	private String location;
+	private String expirydate;
+	
+	@jakarta.persistence.Column(name = "created_at", nullable = false,updatable = false)
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@jakarta.persistence.Column(name = "updated_at",updatable = false)
+	@CreationTimestamp
+	private LocalDateTime updatedAt;
+	
+	
 	
 	public int getJobid() {
-		return Jobid;
+		return jobid;
 	}
 	public void setJobid(int jobid) {
-		Jobid = jobid;
+		jobid = jobid;
 	}
-	public String getManager() {
-		return manager;
+	public String getJobtitle() {
+		return jobtitle;
 	}
-	public void setManager(String manager) {
-		this.manager = manager;
+	public void setJobtitle(String jobtitle) {
+		this.jobtitle = jobtitle;
 	}
-	public String getTeam_lead() {
-		return team_lead;
+	public String getJobdescription() {
+		return jobdescription;
 	}
-	public void setTeam_lead(String team_lead) {
-		this.team_lead = team_lead;
+	public void setJobdescription(String jobdescription) {
+		this.jobdescription = jobdescription;
 	}
-	public String getSenior_developer() {
-		return senior_developer;
+	public String getExperience() {
+		return experience;
 	}
-	public void setSenior_developer(String senior_developer) {
-		this.senior_developer = senior_developer;
+	public void setExperience(String experience) {
+		this.experience = experience;
 	}
-	public String getJunior_developer() {
-		return junior_developer;
+	public String getLocation() {
+		return location;
 	}
-	public void setJunior_developer(String junior_developer) {
-		this.junior_developer = junior_developer;
+	public void setLocation(String location) {
+		this.location = location;
 	}
-	public String getFrontend_developer() {
-		return frontend_developer;
+	public String getExpirydate() {
+		return expirydate;
 	}
-	public void setFrontend_developer(String frontend_developer) {
-		this.frontend_developer = frontend_developer;
+	public void setExpirydate(String expirydate) {
+		this.expirydate = expirydate;
 	}
-	public String getBackend_developer() {
-		return backend_developer;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
-	public void setBackend_developer(String backend_developer) {
-		this.backend_developer = backend_developer;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
-	public String getTraining_tutors() {
-		return training_tutors;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
-	public void setTraining_tutors(String training_tutors) {
-		this.training_tutors = training_tutors;
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
+	public String getOpenings() {
+		return openings;
+	}
+	public void setOpenings(String openings) {
+		this.openings = openings;
+	}
+	
+	
 	
 	
 	
