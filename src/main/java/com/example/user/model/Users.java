@@ -37,6 +37,9 @@ public class Users {
 	@ManyToMany( cascade = CascadeType.ALL)
 	private List<Salary> salary;
 	
+	@ManyToMany( cascade = CascadeType.ALL)
+	private List<Apply> apply;
+	
 	  @ManyToMany( cascade = CascadeType.ALL)
 	    private List<CheckInOut> checkInOut;
 	  
@@ -116,6 +119,12 @@ public class Users {
 	}
 	public void setCheckInOut(List<CheckInOut> checkInOut) {
 		this.checkInOut = checkInOut;
+	}
+	public List<Apply> getApply() {
+		return apply;
+	}
+	public void setApply(List<Apply> apply) {
+		this.apply = apply;
 	}
 	
 	
