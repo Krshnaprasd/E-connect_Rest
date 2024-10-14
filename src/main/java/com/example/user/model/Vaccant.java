@@ -26,6 +26,10 @@ public class Vaccant {
 	private String location;
 	private String expirydate;
 	
+	
+	@ManyToMany( cascade = CascadeType.ALL)
+	private List<Apply> apply;
+	
 	@jakarta.persistence.Column(name = "created_at", nullable = false,updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -89,6 +93,12 @@ public class Vaccant {
 	}
 	public void setOpenings(String openings) {
 		this.openings = openings;
+	}
+	public List<Apply> getApply() {
+		return apply;
+	}
+	public void setApply(List<Apply> apply) {
+		this.apply = apply;
 	}
 	
 	

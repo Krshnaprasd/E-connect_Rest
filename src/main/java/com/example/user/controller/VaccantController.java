@@ -73,7 +73,7 @@ public class VaccantController {
 		public ResponseEntity<?> getSearchCategoryCount(@PathVariable final String keyword ) {
 			Long count = vaccantRepo.getSearchCount(keyword);
 			return ResponseEntity.status(HttpStatus.OK).body(count);
-	}
+	   }
 
 	   @PostMapping("/search/{page}/{count}/{keyword}")
 	   public ResponseEntity<?> getSearchCategoryName(@PathVariable("page") int page, @PathVariable("count") int count, @PathVariable final String keyword) {

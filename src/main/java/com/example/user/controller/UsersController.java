@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import com.example.user.model.Bank;
 //import com.example.user.model.Address;
 //import com.example.user.model.Bank;
 import com.example.user.model.Users;
+import com.example.user.model.Vaccant;
 import com.example.user.repo.AddressRepo;
 import com.example.user.repo.BankRepo;
 ////import com.example.user.repo.AddressRepo;
@@ -57,6 +59,40 @@ public class UsersController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(use);
 	}
+	
+	 @GetMapping("/get/{userid}")
+	    public ResponseEntity<Users> getUserById(@PathVariable int userid) {
+	        Users user = usersRepo.findByUserid(userid);
+	        if (user != null) {
+	            return ResponseEntity.ok(user);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    }
+	
+	@GetMapping("/get/{page}/{count}")
+	   public ResponseEntity<?> getjobs(@PathVariable("page") int page, @PathVariable("count") int count) {
+	      List<Users> use = usersRepo.findAllPageable(PageRequest.of(page, count));
+	      return ResponseEntity.status(HttpStatus.OK).body(use);
+	   }
+	   
+	   @GetMapping("/get/count")
+		public ResponseEntity<?> getBooksCount() {
+			Long count = usersRepo.getCount();
+			return ResponseEntity.status(HttpStatus.OK).body(count);
+		}
+	   
+	   @PostMapping("/search/count/{keyword}")
+		public ResponseEntity<?> getSearchCategoryCount(@PathVariable final String keyword ) {
+			Long count = usersRepo.getSearchCount(keyword);
+			return ResponseEntity.status(HttpStatus.OK).body(count);
+	   }
+
+	   @PostMapping("/search/{page}/{count}/{keyword}")
+	   public ResponseEntity<?> getSearchName(@PathVariable("page") int page, @PathVariable("count") int count, @PathVariable final String keyword) {
+	      List<Users> use = usersRepo.findName(keyword, PageRequest.of(page, count));
+	      return ResponseEntity.status(HttpStatus.OK).body(use);
+	   }
 	
 	@PostMapping("/check")
 	public ResponseEntity<?> validateUser(@RequestBody Users user) {

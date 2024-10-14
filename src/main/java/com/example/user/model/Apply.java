@@ -1,5 +1,9 @@
 package com.example.user.model;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.example.user.model.Users;
 
 import jakarta.persistence.Entity;
@@ -15,9 +19,13 @@ import jakarta.persistence.Table;
 public class Apply {
 	
 	 @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
-	    private Users users;
+	 @JoinColumn(name = "user_id", nullable = false)
+	 private Users users;
 	
+	 @ManyToOne
+	 @JoinColumn(name = "job_id", nullable = false)
+	 private Vaccant vaccant;
+	 
 	 @Id
 	@GeneratedValue
 	private int applyid;
@@ -27,6 +35,29 @@ public class Apply {
 	private String expectedctc;
 	private String currentctc;
 	private String preferredlocation;
+	
+	@jakarta.persistence.Column(name = "created_at", nullable = false,updatable = false)
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@jakarta.persistence.Column(name = "updated_at",updatable = false)
+	@CreationTimestamp
+	private LocalDateTime updatedAt;
+	
+	
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	public Users getUsers() {
 		return users;
 	}
@@ -77,6 +108,12 @@ public class Apply {
 	}
 	public void setPreferredlocation(String preferredlocation) {
 		this.preferredlocation = preferredlocation;
+	}
+	public Vaccant getVaccant() {
+		return vaccant;
+	}
+	public void setVaccant(Vaccant vaccant) {
+		this.vaccant = vaccant;
 	}
 	
 	
